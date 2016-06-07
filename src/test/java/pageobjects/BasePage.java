@@ -34,6 +34,7 @@ public class BasePage implements Config {
 
     public void goToPage(String url) throws InterruptedException {
         driver.get(BASE_URL + url);
+        Thread.sleep(5000);
         initializeElements();
         debug();
     }
