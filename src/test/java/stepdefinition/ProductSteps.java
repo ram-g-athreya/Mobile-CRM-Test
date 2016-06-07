@@ -33,7 +33,7 @@ public class ProductSteps extends BaseSteps {
             homePage.goToPage("/");
         }
         else {
-            productPage.goToPage("/product/66");
+            productPage.goToPage("/product/47");
         }
     }
 
