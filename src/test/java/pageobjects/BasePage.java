@@ -15,12 +15,8 @@ public class BasePage implements Config {
 
     private void debug() throws InterruptedException {
         if(DEBUG) {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         }
-    }
-
-    public BasePage() {
-
     }
 
     public void initializeElements(){

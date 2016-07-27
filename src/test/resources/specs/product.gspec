@@ -1,0 +1,22 @@
+
+@objects
+    logo    css   .logo
+    header  css   section.content-header
+    image   css   img
+
+= Page Header Section =
+    @on *
+        logo:
+            text is "Mobile CRM"
+
+    @on desktop
+        logo:
+            width 220px
+
+    @on tablet
+        logo:
+            width >200px
+
+    @on mobile
+        logo:
+            width 100 % of screen/width

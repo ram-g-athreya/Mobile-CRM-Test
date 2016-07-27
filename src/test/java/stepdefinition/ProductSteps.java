@@ -5,21 +5,21 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageobjects.HomePage;
 import pageobjects.ProductPage;
+
+import java.net.MalformedURLException;
 
 /**
  * Created by ramathreya on 04/06/16.
  */
+
 public class ProductSteps extends BaseSteps {
-    private HomePage homePage;
     private ProductPage productPage;
 
     @Before
-    public void setup() {
+    public void setup() throws MalformedURLException {
         super.setup();
         productPage = new ProductPage(driver);
-        homePage = new HomePage(driver);
     }
 
     @After
@@ -28,13 +28,13 @@ public class ProductSteps extends BaseSteps {
     }
 
     @Given("^I open (.*?)$")
-    public void openPage(String page) throws InterruptedException {
-        if (page.equals("HomePage")) {
-            homePage.goToPage("/");
-        }
-        else {
-            productPage.goToPage("/product/47");
-        }
+    public void openPage(String productID) throws InterruptedException {
+        productPage.goToPage("/product/" + productID);
+    }
+
+    @When("^I enter (.*?) in \"(.*?)\"$")
+    public void enterTextField(String value, String element) throws InterruptedException {
+        productPage.sendKeys(value, productPage.getElement(element));
     }
 
     @When("^I click on \"(.*?)\"$")
@@ -42,9 +42,10 @@ public class ProductSteps extends BaseSteps {
         productPage.buyProduct();
     }
 
-    @When("^I enter \"(.*?)\" in \"(.*?)\"$")
-    public void enterTextField(String value, String element) throws InterruptedException {
-        productPage.sendKeys(value, productPage.getElement(element));
+    @Then("^I get confirmation of purchase$")
+    public void confirmation() throws InterruptedException {
+        assert productPage.checkConfirmMessage();
     }
-
 }
+
+
